@@ -1,9 +1,14 @@
 from fastapi import FastAPI
-from routers import user, task
+
+from routers.task import router_task
+from routers.user import router_user
+
+
+
 
 app = FastAPI()
-app.include_router(user.router_user)
-app.include_router(task.router_task)
+app.include_router(router_user)
+app.include_router(router_task)
 
 
 @app.get("/")
