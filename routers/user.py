@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from backend.db_depends import get_db
 from typing import Annotated
 from models.user import User
+
 from schemas import CreateUser, UpdateUser
 
 router_user = APIRouter(prefix="/user", tags=["user"])
