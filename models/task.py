@@ -5,6 +5,8 @@ from backend.db import Base, str_256, slug
 
 from sqlalchemy import ForeignKey, text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
+from models.user import User
+
 
 intpk = Annotated[int, mapped_column(primary_key=True, index=True)]
 created_at = Annotated[datetime, mapped_column(server_default=text("TIMEZONE('utc', now())"))]
@@ -24,7 +26,7 @@ class Task(Base):
     created_at: Mapped[created_at]
     #updated_at: Mapped[updated_at]
 
-    user = relationship('User', back_populates='tasks')
+    user: Mapped["User"] = relationship('User', back_populates='tasks')
 
 
 # from sqlalchemy.schema import CreateTable

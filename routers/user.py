@@ -44,7 +44,7 @@ async def create_user(db: Annotated[Session, Depends(get_db)], user: CreateUser)
 
 @router_user.put("/update")
 async def update_user(db: Annotated[Session, Depends(get_db)], user: UpdateUser, user_id: int):
-    user_by = db.scalar(select(User).where(User.id == user_id))
+    user_by = db.execute(select(User).where(User.id == user_id))
     if user_by is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User was not found")
 
@@ -62,7 +62,7 @@ async def update_user(db: Annotated[Session, Depends(get_db)], user: UpdateUser,
 
 @router_user.delete("/delete")
 async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
-    user_by = db.scalars(select(User).where(User.id == user_id))
+    user_by = db.scalar(select(User).where(User.id == user_id))
     if user_by is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User was not found")
     db.execute(delete(User).where(User.id == user_id))
