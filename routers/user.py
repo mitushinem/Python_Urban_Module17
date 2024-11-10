@@ -40,7 +40,6 @@ async def create_user(db: Annotated[Session, Depends(get_db)], user: CreateUser)
             'status_code': status.HTTP_404_NOT_FOUND,
             'transaction': 'The user is already in the database',
         }
-
     return {
         'status_code': status.HTTP_201_CREATED,
         'transaction': 'User created successfully',
