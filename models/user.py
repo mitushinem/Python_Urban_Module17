@@ -1,6 +1,6 @@
 from backend.db import Base, slug
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from models.task import Task
+
 
 class User(Base):
     __tablename__ = 'users'
@@ -11,7 +11,4 @@ class User(Base):
     lastname: Mapped[str]
     age: Mapped[int]
     slug: Mapped[slug]
-    tasks: Mapped[list["Task"]] = relationship('Task', back_populates='user')
 
-# from sqlalchemy.schema import CreateTable
-# print(CreateTable(User.__table__))
