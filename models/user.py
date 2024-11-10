@@ -11,4 +11,5 @@ class User(Base):
     lastname: Mapped[str]
     age: Mapped[int]
     slug: Mapped[slug]
+    tasks = relationship("Task", back_populates="user")
 

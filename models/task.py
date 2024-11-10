@@ -6,8 +6,8 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 
 intpk = Annotated[int, mapped_column(primary_key=True, index=True)]
-created_at = Annotated[datetime, mapped_column(server_default=text("TIMEZONE('utc', now())"))]
-
+# created_at = Annotated[datetime, mapped_column(server_default=text("TIMEZONE('utc', now())"))]
+created_at = Annotated[datetime, mapped_column(default=datetime.now)]
 
 class Task(Base):
     __tablename__ = 'tasks'
@@ -17,7 +17,8 @@ class Task(Base):
     content: Mapped[str]
     priority: Mapped[int] = mapped_column(default=0)
     completed: Mapped[bool] = mapped_column(default=False)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), nullable=False, index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
     slug: Mapped[slug]
     created_at: Mapped[created_at]
+    user = relationship("User", back_populates="tasks")
 
